@@ -1,0 +1,43 @@
+package com.MSME.HRMS.TestCases;
+
+import org.openqa.selenium.WebDriver;
+
+import com.MSME.HRMS.Helper.ClaimSetUpHelper;
+import com.MSME.HRMS.Helper.LoginHRMSHelper;
+import com.MSME.Utilities.Readconfig;
+
+public class TC_HRMS_042_ClaimSetUp_Disable {
+
+	public boolean Execute(WebDriver mydriver,String LoginTestDataId,String TestDataId)
+	  { 
+		 try
+		 {
+			  LoginHRMSHelper lp = new LoginHRMSHelper(mydriver,LoginTestDataId);
+			  ClaimSetUpHelper CSH = new ClaimSetUpHelper(mydriver,TestDataId);
+			  Readconfig RC=new Readconfig();
+			  
+			  //Test Step 1 : Open URL
+			
+			 if( lp.login(RC.pro.getProperty("HRMSUrl"))==false)
+			 {
+				
+				 return false;
+			 }
+			
+			 if(CSH.disableRecord()==true)
+			 {
+				 return true;
+			 }
+			 else
+			 {
+				 return false;
+			 }
+		 }
+		 catch(Exception e)
+		 {
+			 System.out.println("Error at TC_HRMS_042_ClaimSetUp_Disable.Execute" + e.getMessage());
+			 return false;
+		 }
+		  
+	  }
+}
